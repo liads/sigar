@@ -473,6 +473,7 @@
           <define name="_CRT_SECURE_NO_DEPRECATE"/>
           <!-- XXX 2008 MSC express/SDK does not include atl headers -->
           <define name="SIGAR_NO_ATL" if="jni.noatl"/>
+          <define name="SIGAR_64BIT" if="jni.arch64"/>
         </defineset>
       </compiler>
 
