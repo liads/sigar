@@ -108,6 +108,7 @@ static int get_formatted_message(EVENTLOGRECORD *pevlr,
 {
     LPVOID msgbuf = NULL;
     WCHAR msgdll[MAX_MSG_LENGTH];
+    wchar_t* buffer;
     LPWSTR insert_strs[56], ptr;
     int i, max = ARRLEN(insert_strs);
     const DWORD flags =
@@ -130,7 +131,7 @@ static int get_formatted_message(EVENTLOGRECORD *pevlr,
         }
     }
 
-    ptr = wcstok(msgdll, FILESEP);
+    ptr = wcstok(msgdll, FILESEP, &buffer);
     while (ptr) {
         HINSTANCE hlib;
 
@@ -150,7 +151,7 @@ static int get_formatted_message(EVENTLOGRECORD *pevlr,
                 break;
             }
         }
-        ptr = wcstok(NULL, FILESEP);
+        ptr = wcstok(NULL, FILESEP, &buffer);
     }
 
     if (msgbuf) {
